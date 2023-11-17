@@ -154,7 +154,7 @@ class Game {
         context.fillStyle = "white";
         context.shadowColor = "black";
         context.shadowBlur = 10;
-        context.fillText('Best time: ' + formatTime(localStorage.bestTime), 20, 10)
+        context.fillText('Best time: ' + formatTime(localStorage.bestTime ? 0 : localStorage.bestTime), 20, 10)
         context.fillText('Time: ' + formatTime(this.currentTime), 20, 50)
 
         if (this.gameOver) {
