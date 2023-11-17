@@ -1,0 +1,9 @@
+
+#canvas1 {
+    border: 2px solid gray;
+    background: black;
+    display: block;
+}
+.hidden {
+    display: none;
+}
