@@ -1,8 +1,13 @@
+body {
+    overflow: hidden;
+    margin: 0;
+}
 
 #canvas1 {
-    border: 2px solid gray;
+    border: 3px solid crimson;
     background: black;
     display: block;
+
 }
 .hidden {
     display: none;

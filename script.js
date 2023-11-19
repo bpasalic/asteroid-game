@@ -93,6 +93,9 @@ class Game {
                 key === "ArrowDown") && this.arrows.indexOf(key) === -1) {
                 this.arrows.push(key);
             }
+            else if (key === "Enter" && gameOver) {
+                location.reload();
+            }
         })
         window.addEventListener("keyup", (e) => {
             const key = e.key; // "ArrowRight", "ArrowLeft", "ArrowUp", or "ArrowDown"
@@ -177,8 +180,9 @@ window.addEventListener('load', function () {
     const canvas = document.getElementById('canvas1');
     const ctx = canvas.getContext('2d');
 
-    canvas.width = this.window.innerWidth;
-    canvas.height = this.window.innerHeight;
+    const border = 3;
+    canvas.width = this.window.innerWidth - 2 * border;
+    canvas.height = this.window.innerHeight - 2 * border;
 
     const game = new Game(canvas);
 
@@ -190,6 +194,11 @@ window.addEventListener('load', function () {
         game.update();
         game.render(ctx, deltaTime);
         if (!game.gameOver) requestAnimationFrame(animate);
+        else {
+            setTimeout(() => {
+                location.reload();
+            }, 5000);
+        }
     }
     this.requestAnimationFrame(animate);
 });
