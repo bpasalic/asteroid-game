@@ -159,13 +159,14 @@ class Game {
         context.fillStyle = "white";
         context.shadowColor = "black";
         context.shadowBlur = 10;
-        context.fillText('Best time: ' + formatTime(localStorage.bestTime === undefined ? 0 : localStorage.bestTime), 20, 10)
+        const bestTime = !localStorage.getItem('bestTime') ? 0 : localStorage.getItem('bestTime')
+        context.fillText('Best time: ' + formatTime(bestTime), 20, 10)
         context.fillText('Time: ' + formatTime(this.currentTime), 20, 50)
 
         if (this.gameOver) {
-            if (!localStorage.bestTime || this.currentTime > localStorage.bestTime) {
+            if (this.currentTime > bestTime) {
                 //update best time after game over
-                localStorage.bestTime = this.currentTime
+                localStorage.setItem('bestTime', this.currentTime)
             }
             context.textAlign = 'center';
             context.font = '60px Impact';
@@ -208,11 +209,13 @@ window.addEventListener('load', function () {
 
 function formatTime(ms) {
     const min = Math.floor(ms / (60 * 1000));
-    const sec = Math.floor((ms % (60 * 1000)) / 1000);
-    const msec = (ms % 1000);
+    const sec = Math.floor((ms / 1000) % 60);
+    const msec = (ms % 1000).toFixed(0);
     const formattedMinutes = min.toString().padStart(2, '0');
     const formattedSeconds = sec.toString().padStart(2, '0');
-    const formattedMilliseconds = msec.toString().padStart(3, '0').slice(0, 3);
+    const formattedMilliseconds = msec.toString().padStart(3, '0');
 
     return `${formattedMinutes}:${formattedSeconds}.${formattedMilliseconds}`;
 }
+
+
